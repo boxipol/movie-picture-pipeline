@@ -74,6 +74,10 @@ jobs:
     needs: [test, lint]
     runs-on: ubuntu-latest
     steps:
+      - name: Build project
+        run: npm run build
+        working-directory: ./frontend
+
       - name: Publish test results
         uses: actions/upload-artifact@v4.6.2
         with:
