@@ -82,6 +82,10 @@ jobs:
         with:
           node-version: latest
 
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend
+
       - name: Build project
         run: npm run build
         working-directory: ./frontend
