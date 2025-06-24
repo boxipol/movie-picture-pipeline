@@ -32,8 +32,9 @@ jobs:
         run: echo "This is not the main branch."
 
       - name: Install dependencies
-        run: npm install
-        working-directory: ./app
+        run: |
+          cd /home/runner/work/movie-picture-pipeline
+          npm install
 
 #      - name: Init npm
 #        run: npm init
