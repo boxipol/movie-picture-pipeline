@@ -4,7 +4,7 @@
 # Create a VPC
 resource "aws_vpc" "vpc" {
   tags = {
-    "Name" = "udacity"
+    "Name" = "udacity-vpc"
   }
   cidr_block           = "10.0.0.0/16"
   enable_dns_support   = true
@@ -23,7 +23,7 @@ resource "aws_subnet" "public_subnet" {
   availability_zone       = "us-east-1${var.public_az}"
   map_public_ip_on_launch = true
   tags = {
-    Name = "udacity-public"
+    Name = "udacity-public-sn"
   }
 }
 
@@ -37,7 +37,7 @@ resource "aws_route_table" "public" {
   }
 
   tags = {
-    Name = "public"
+    Name = "public-rt"
   }
 }
 
@@ -53,7 +53,7 @@ resource "aws_subnet" "private_subnet" {
   availability_zone = "us-east-1${var.private_az}"
   cidr_block        = "10.0.2.0/24"
   tags = {
-    Name = "udacity-private"
+    Name = "udacity-private-sn"
   }
 }
 
@@ -62,7 +62,7 @@ resource "aws_route_table" "private" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "private"
+    Name = "private-rt"
   }
 }
 
@@ -117,7 +117,7 @@ resource "aws_vpc_endpoint" "ecr-api-endpoint" {
 # ECR Repositories
 ###################
 resource "aws_ecr_repository" "frontend" {
-  name                 = "frontend"
+  name                 = "frontend-repo"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
 
@@ -127,7 +127,7 @@ resource "aws_ecr_repository" "frontend" {
 }
 
 resource "aws_ecr_repository" "backend" {
-  name                 = "backend"
+  name                 = "backend-repo"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
 
@@ -141,7 +141,7 @@ resource "aws_ecr_repository" "backend" {
 ################
 # Create an EKS cluster
 resource "aws_eks_cluster" "main" {
-  name     = "cluster"
+  name     = "movie-app-cluster"
   version  = var.k8s_version
   role_arn = aws_iam_role.eks_cluster.arn
   vpc_config {
@@ -192,7 +192,7 @@ data "aws_ssm_parameter" "eks_ami_release_version" {
 }
 
 resource "aws_eks_node_group" "main" {
-  node_group_name = "udacity"
+  node_group_name = "udacity-ng"
   cluster_name    = aws_eks_cluster.main.name
   version         = aws_eks_cluster.main.version
   node_role_arn   = aws_iam_role.node_group.arn
@@ -275,7 +275,7 @@ resource "aws_codebuild_project" "codebuild" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/your-org/your-repo"
+    location        = "https://github.com/boxipol/movie-picture-pipeline"
     git_clone_depth = 1
     buildspec       = "buildspec.yml"
   }
