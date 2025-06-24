@@ -33,8 +33,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd /home/runner/work/movie-picture-pipeline
+          ls
           npm install
+          working-directory: ./movie-picture-pipeline
 
 #      - name: Init npm
 #        run: npm init
