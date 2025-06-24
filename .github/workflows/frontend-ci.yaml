@@ -74,8 +74,17 @@ jobs:
     needs: [test, lint]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+
       - name: Build project
         run: npm run build
+        working-directory: ./frontend
 
       - name: Publish test results
         uses: actions/upload-artifact@v4.6.2
