@@ -32,17 +32,15 @@ jobs:
         run: echo "This is not the main branch."
 
       - name: Install dependencies
-        run: |
-          ls
-          npm install
-          working-directory: ./movie-picture-pipeline
+        run: npm install
+        working-directory: ./frontend
 
 #      - name: Init npm
 #        run: npm init
 
       - name: Run tests
         run: npm test
-        working-directory: ./app
+        working-directory: ./frontend
 
       - name: Debug message
         if: env.DEBUG == 'true'
