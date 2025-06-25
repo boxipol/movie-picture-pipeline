@@ -112,6 +112,7 @@ jobs:
           
 
       - name: Build the package
+        working-directory: ./backend
         run: |
           pipenv run python -m backend
 
