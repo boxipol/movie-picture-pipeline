@@ -72,6 +72,11 @@ jobs:
         run: |
           python -m backend.test_app
 
+      - name: Run Flake8
+        run: |
+          flake8 . --max-line-length=100
+        working-directory: ./backend
+
       - name: Debug message
         if: env.DEBUG == 'true'
         run: echo "Debugging is enabled."
