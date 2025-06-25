@@ -77,7 +77,7 @@ jobs:
           pipenv install --dev
 
       - name: Run tests
-
+        working-directory: ./backend
         run: |
           pipenv run pytest
 
