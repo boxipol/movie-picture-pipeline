@@ -76,8 +76,8 @@ jobs:
       - name: Lint with test app
         working-directory: ./backend
         run: |
-#          python -m backend.test_app
           flake8 movies/
+#          python -m backend.test_app
 
   build:
     needs: [test, lint]
