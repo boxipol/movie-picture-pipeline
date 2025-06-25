@@ -76,10 +76,10 @@ jobs:
             pip install flake8 pytest
             pip install flask-cors
 
-      - name: Run Flake8
+      - name: Run tests
         working-directory: ./backend
         run: |
-          flake8 . --max-line-length=200
+          pipenv run pytest
 
       - name: Debug message
         if: env.DEBUG == 'true'
