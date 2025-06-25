@@ -71,7 +71,6 @@ jobs:
       - name: Run tests with pytest
         run: |
           python -m backend.test_app
-        working-directory: ./backend
 
       - name: Debug message
         if: env.DEBUG == 'true'
