@@ -109,7 +109,7 @@ jobs:
 
       - name: Build the package
         run: |
-          pipenv run python -m build
+          pipenv run python -m backend
 
       - name: Publish test results
         uses: actions/upload-artifact@v4.6.2
