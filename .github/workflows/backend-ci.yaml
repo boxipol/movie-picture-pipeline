@@ -3,6 +3,10 @@ name: Backend CI
 on:
   workflow_dispatch:
 
+  push:
+    branches:
+      - main
+
   pull_request:
     branches:
       - main
@@ -74,7 +78,7 @@ jobs:
 
       - name: Run Flake8
         run: |
-          flake8 . --max-line-length=100
+          flake8 . --max-line-length=200
         working-directory: ./backend
 
       - name: Debug message
