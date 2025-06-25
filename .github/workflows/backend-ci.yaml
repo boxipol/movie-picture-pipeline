@@ -105,10 +105,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install pipenv
 
-          pip install flask
+          pipenv run pip install flask-cors
         
           pipenv run pip install flask
-          pipenv run pip install flask-cors
+          
           pipenv install --dev
 
       - name: Build the package
