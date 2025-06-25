@@ -1,4 +1,4 @@
-name: Project workflow
+name: Frontend CI
 
 on:
   workflow_dispatch:
