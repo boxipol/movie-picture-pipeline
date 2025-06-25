@@ -105,6 +105,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pipenv
 
+          pip install flask
         
           pipenv run pip install flask
           pipenv run pip install flask-cors
