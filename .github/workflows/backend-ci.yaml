@@ -3,10 +3,6 @@ name: Backend CI
 on:
   workflow_dispatch:
 
-  push:
-    branches:
-      - main
-
   pull_request:
     branches:
       - main
@@ -77,7 +73,6 @@ jobs:
         working-directory: ./backend
         run: |
           flake8 movies/
-#          python -m backend.test_app
 
   build:
     needs: [test, lint]
