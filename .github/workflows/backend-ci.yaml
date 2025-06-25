@@ -109,8 +109,9 @@ jobs:
           pipenv run pip install flask
 
       - name: Build the package
+        working-directory: ./backend
         run: |
-          pipenv run python -m backend.test_app
+          pipenv run python -m movies.movies_api
 
       - name: Publish test results
         uses: actions/upload-artifact@v4.6.2
