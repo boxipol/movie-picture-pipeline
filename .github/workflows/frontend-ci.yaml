@@ -18,6 +18,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: latest
+          cache: 'npm'
 
       - name: Install dependencies
         working-directory: ./frontend
@@ -37,6 +38,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: latest
+          cache: 'npm'
 
       - name: Install dependencies
         working-directory: ./frontend
@@ -57,6 +59,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: latest
+          cache: 'npm'
 
       - name: Install dependencies
         working-directory: ./frontend
@@ -65,6 +68,11 @@ jobs:
       - name: Build project
         working-directory: ./frontend
         run: npm run build
+
+#      added
+      - name: Test project
+        working-directory: ./frontend
+        run: npm run test
 
       - name: Publish test results
         uses: actions/upload-artifact@v4.6.2
