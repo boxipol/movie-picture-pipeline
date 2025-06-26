@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: frontend-app
   labels:
-    app: frontend
+    app: Create new scratch file from selection
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: Create new scratch file from selection
   template:
     metadata:
       labels:
-        app: frontend
+        app: Create new scratch file from selection
     spec:
       containers:
-        - name: frontend
-          image: frontend-app
+        - name: frontend-container
+          image: 381491841776.dkr.ecr.us-east-1.amazonaws.com/frontend-app:latest
           ports:
             - containerPort: 3000
