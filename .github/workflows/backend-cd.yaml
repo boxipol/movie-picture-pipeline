@@ -120,7 +120,7 @@ jobs:
           IMAGE_URI=${ECR_REGISTRY}/backend-app:latest
             
           echo "Building image: $IMAGE_URI"
-          docker build -t $IMAGE_URI .
+          docker build -t $IMAGE_URI ./backend/Dockerfile
           docker push $IMAGE_URI
 
 
