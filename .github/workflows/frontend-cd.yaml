@@ -94,10 +94,10 @@ jobs:
         uses: docker/build-push-action@v5
 
         with:
-          context: ./backend
-          file: ./backend/Dockerfile
+          context: ./frontend
+          file: ./frontend/Dockerfile
           push: true
-          tags: boxipol/backend-app:latest
+          tags: boxipol/frontend-app:latest
 #  ${{ github.sha }}
 
 #      - name: "Configure AWS Credentials" Action for GitHub Actions
