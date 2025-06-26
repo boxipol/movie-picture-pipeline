@@ -100,9 +100,21 @@ jobs:
           tags: boxipol/backend-app:latest
 #  ${{ github.sha }}
 
-#      - name: "Configure AWS Credentials" Action for GitHub Actions
-#        uses: aws-actions/configure-aws-credentials@v4.2.1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.2.1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets. AWS_SECRET_ACCESS_KEY 7}
+          aws-session-token: ${{secrets.AWS_SESSION_TOKEN}}
+          aws-region: us-east-1
 
+#      - name: Create CloudFormation Stack
+#        uses:
+#          aws-actions/aws-cloudformation-github-deploy@v1
+#        with:
+#          name: udatest
+#          template: udatest. yml
+#          no-fail-on-empty-changeset: "1
 
 #      - name: Set up Python
 #        uses: actions/setup-python@v5
