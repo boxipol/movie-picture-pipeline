@@ -114,7 +114,7 @@ jobs:
         with:
           name: udatest-stack
           template: /backend/deployment.yml
-          no-fail-on-empty-changeset: "1
+          no-fail-on-empty-changeset: "1"
 
 #      - name: Set up Python
 #        uses: actions/setup-python@v5
