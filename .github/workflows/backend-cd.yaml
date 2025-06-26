@@ -104,8 +104,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4.2.1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets. AWS_SECRET_ACCESS_KEY 7}
-          aws-session-token: ${{secrets.AWS_SESSION_TOKEN}}
+          aws-secret-access-key: ${{ secrets. AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
 
 #      - name: Create CloudFormation Stack
