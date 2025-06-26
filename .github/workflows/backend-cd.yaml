@@ -97,7 +97,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: boxipol/aws-demo/movies-app:latest
+          tags: boxipol/aws-demo:latest
 #  ${{ github.sha }}
 #      - name: "Configure AWS Credentials" Action for GitHub Actions
 #        uses: aws-actions/configure-aws-credentials@v4.2.1
