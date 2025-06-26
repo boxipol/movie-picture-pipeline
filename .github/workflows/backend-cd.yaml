@@ -7,75 +7,80 @@ on:
     branches:
       - main
 
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: backend-app
+  REACT_APP_MOVIE_API_URL: http://localhost:5000
+
 jobs:
-#  test:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v4
-#
-#      - name: Set up Python
-#        uses: actions/setup-python@v5
-#        with:
-#          node-version: 3.12
-#
-#      - name: Cache pipenv and pip cache
-#        uses: actions/cache@v4
-#        with:
-#          path: |
-#            ~/.cache/pip
-#            ~/.local/share/virtualenvs
-#          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
-#          restore-keys: |
-#            ${{ runner.os }}-pipenv-
-#
-#      - name: Install dependencies
-#        working-directory: ./backend
-#        run: |
-#          python -m pip install --upgrade pip
-#          pip install pipenv
-#          pipenv install --dev
-#
-#      - name: Run tests with pytest
-#        working-directory: ./backend
-#        run: |
-#          pipenv run pytest
-#
-#  lint:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v4
-#
-#      - name: Set up Python
-#        uses: actions/setup-python@v5
-#        with:
-#          node-version: 3.12
-#
-#      - name: Cache pipenv and pip cache
-#        uses: actions/cache@v4
-#        with:
-#          path: |
-#            ~/.cache/pip
-#            ~/.local/share/virtualenvs
-#          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
-#          restore-keys: |
-#            ${{ runner.os }}-pipenv-
-#
-#      - name: Install dependencies
-#        working-directory: ./backend
-#        run: |
-#          python -m pip install --upgrade pip
-#          pip install flake8 pytest
-#          pip install flask-cors
-#
-#      - name: Lint with test app
-#        working-directory: ./backend
-#        run: |
-#          flake8 movies/
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          node-version: 3.12
+
+      - name: Cache pipenv and pip cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pipenv-
+
+      - name: Install dependencies
+        working-directory: ./backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+          pipenv install --dev
+
+      - name: Run tests with pytest
+        working-directory: ./backend
+        run: |
+          pipenv run pytest
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          node-version: 3.12
+
+      - name: Cache pipenv and pip cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pipenv-
+
+      - name: Install dependencies
+        working-directory: ./backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          pip install flask-cors
+
+      - name: Lint with test app
+        working-directory: ./backend
+        run: |
+          flake8 movies/
 
   build:
-#    needs: [test, lint]
+    needs: [test, lint]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -92,12 +97,12 @@ jobs:
 #
 #      - name: Build and push Docker image
 #        uses: docker/build-push-action@v5
-#
 #        with:
 #          context: ./backend
 #          file: ./backend/Dockerfile
 #          push: true
 #          tags: boxipol/backend-app:latest
+#      --build-arg=REACT_APP_MOVIE_API_URL=${REACT_APP_MOVIE_API_URL}
 #  ${{ github.sha }}
 
       - name: Configure AWS Credentials
@@ -106,8 +111,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets. AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: us-east-1
-
+          aws-region: ${AWS_REGION}
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -118,7 +122,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          IMAGE_URI=${ECR_REGISTRY}/backend-app:latest
+          IMAGE_URI=${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
             
           echo "Building image: $IMAGE_URI"
           docker build -t $IMAGE_URI .
