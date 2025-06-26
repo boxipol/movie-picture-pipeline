@@ -108,13 +108,13 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
 
-#      - name: Create CloudFormation Stack
-#        uses:
-#          aws-actions/aws-cloudformation-github-deploy@v1
-#        with:
-#          name: udatest
-#          template: udatest. yml
-#          no-fail-on-empty-changeset: "1
+      - name: Create CloudFormation Stack
+        uses:
+          aws-actions/aws-cloudformation-github-deploy@v1
+        with:
+          name: udatest-stack
+          template: /backend/deployment.yml
+          no-fail-on-empty-changeset: "1
 
 #      - name: Set up Python
 #        uses: actions/setup-python@v5
