@@ -69,14 +69,14 @@ jobs:
         working-directory: ./frontend
         run: npm run build
 
-#      added
       - name: Test project
         working-directory: ./frontend
         run: npm run test
 
-      - name: Publish test results
-        uses: actions/upload-artifact@v4.6.2
+      - name: Set up Docker Build
+        uses: docker/setup-buildx-action@v3
 
-        with:
-          name: test-results
-          path: build/
+      - name: Build Docker image
+        working-directory: ./frontend
+        run: |
+          docker build -t frontend-app .
